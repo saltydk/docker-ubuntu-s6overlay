@@ -18,7 +18,7 @@ RUN mkdir "${APP_DIR}" && \
 # install packages
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
-        ca-certificates jq curl unzip p7zip-full unrar python3 \
+        ca-certificates jq curl wget2 unzip p7zip-full unrar python3 \
         locales tzdata && \
 # generate locale
     locale-gen en_US.UTF-8 && \
@@ -31,7 +31,10 @@ RUN apt update && \
 ARG S6_VERSION=2.2.0.3
 
 # install s6-overlay
-RUN curl -fsSL "https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz" | tar xzf - -C /
+RUN file="/tmp/s6-overlay.tar.gz" && curl -fsSL -o "${file}" "https://github.com/just-containers/s6-overlay/releases/download/v${S6_VERSION}/s6-overlay-amd64.tar.gz" && \	
+    tar xzf "${file}" -C / --exclude="./bin" && \	
+    tar xzf "${file}" -C /usr ./bin && \	
+    rm "${file}"
 
 ARG BUILD_ARCHITECTURE
 ENV BUILD_ARCHITECTURE=$BUILD_ARCHITECTURE
