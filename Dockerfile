@@ -19,7 +19,7 @@ RUN mkdir "${APP_DIR}" && \
 RUN apt update && \
     apt install -y --no-install-recommends --no-install-suggests \
         ca-certificates jq curl wget2 unzip p7zip-full unrar python3 \
-        locales tzdata && \
+        python3-pip locales tzdata && \
 # generate locale
     locale-gen en_US.UTF-8 && \
 # clean up
