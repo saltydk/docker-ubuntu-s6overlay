@@ -36,7 +36,4 @@ RUN file="/tmp/s6-overlay.tar.gz" && curl -fsSL -o "${file}" "https://github.com
     tar xzf "${file}" -C /usr ./bin && \	
     rm "${file}"
 
-ARG BUILD_ARCHITECTURE
-ENV BUILD_ARCHITECTURE=$BUILD_ARCHITECTURE
-
 COPY root/ /
