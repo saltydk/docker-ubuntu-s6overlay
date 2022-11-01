@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:jammy
 
 ARG DEBIAN_FRONTEND="noninteractive"
 
